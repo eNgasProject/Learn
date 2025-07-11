@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngas Language Learning</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-logo">Ngas</div>
+            <div class="nav-links">
+                <button class="nav-link active" data-screen="home"><i class="fas fa-home"></i> Home</button>
+                <button class="nav-link" data-screen="vocabulary"><i class="fas fa-book"></i> Vocabulary</button>
+                <button class="nav-link" data-screen="flashcards"><i class="fas fa-layer-group"></i> Flashcards</button>
+                <button class="nav-link" data-screen="quiz"><i class="fas fa-question-circle"></i> Quiz</button>
+                <button class="nav-link" data-screen="matching"><i class="fas fa-random"></i> Matching</button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Home Screen -->
+            <div id="home-screen" class="screen active">
+                <h1>Word of the Day</h1>
+                <div class="word-of-the-day">
+                    <div class="word-card">
+                        <h2 id="wotd-ngas">Loading...</h2>
+                        <p id="wotd-english" class="translation">Loading...</p>
+                        <p id="wotd-category" class="category">Loading...</p>
+                        <div class="media-controls">
+                            <button id="play-audio" class="media-btn"><i class="fas fa-volume-up"></i> Audio</button>
+                            <button id="show-image" class="media-btn"><i class="fas fa-image"></i> Image</button>
+                            <button id="show-video" class="media-btn"><i class="fas fa-video"></i> Video</button>
+                        </div>
+                    </div>
+                    <div id="media-display" class="media-display">
+                        <!-- Media will be displayed here -->
+                    </div>
+                </div>
+                <div class="recent-words">
+                    <h3>Recent Words</h3>
+                    <div id="recent-words-list" class="word-list">
+                        <!-- Recent words will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vocabulary Screen -->
+            <div id="vocabulary-screen" class="screen">
+                <h1>Vocabulary</h1>
+                <div class="search-filter">
+                    <input type="text" id="search-input" placeholder="Search words...">
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="Nature">Nature</option>
+                        <option value="Objects">Objects</option>
+                        <option value="People">People</option>
+                        <option value="Actions">Actions</option>
+                        <option value="Time">Time</option>
+                        <option value="Expressions">Expressions</option>
+                        <option value="Body">Body</option>
+                        <option value="Animals">Animals</option>
+                        <option value="Places">Places</option>
+                        <option value="Attributes">Attributes</option>
+                        <option value="Abstract">Abstract</option>
+                    </select>
+                    <select id="part-of-speech-filter">
+                        <option value="">All Parts of Speech</option>
+                        <option value="Noun">Noun</option>
+                        <option value="Verb">Verb</option>
+                        <option value="Adjective">Adjective</option>
+                        <option value="Adverb">Adverb</option>
+                        <option value="Interjection">Interjection</option>
+                        <option value="Conjunction">Conjunction</option>
+                    </select>
+                </div>
+                <div id="vocabulary-list" class="word-list">
+                    <!-- Vocabulary list will be populated here -->
+                </div>
+            </div>
+
+            <!-- Word Detail Screen (hidden by default) -->
+            <div id="word-detail-screen" class="screen">
+                <button id="back-button" class="back-btn"><i class="fas fa-arrow-left"></i> Back</button>
+                <div class="word-detail">
+                    <h2 id="detail-ngas">Word</h2>
+                    <p id="detail-english" class="translation">Translation</p>
+                    <div class="word-info">
+                        <span id="detail-category" class="info-tag">Category</span>
+                        <span id="detail-pos" class="info-tag">Part of Speech</span>
+                    </div>
+                    <div class="word-usage">
+                        <h3>Usage</h3>
+                        <p id="detail-usage">No usage information available.</p>
+                    </div>
+                    <div class="word-example">
+                        <h3>Example</h3>
+                        <p id="detail-example">No example available.</p>
+                    </div>
+                    <div class="word-media">
+                        <h3>Media</h3>
+                        <div class="media-controls">
+                            <button id="detail-play-audio" class="media-btn"><i class="fas fa-volume-up"></i> Play Audio</button>
+                            <button id="detail-show-image" class="media-btn"><i class="fas fa-image"></i> Show Image</button>
+                            <button id="detail-show-video" class="media-btn"><i class="fas fa-video"></i> Show Video</button>
+                        </div>
+                        <div id="detail-media-display" class="media-display">
+                            <!-- Media will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flashcard Screen -->
+            <div id="flashcards-screen" class="screen">
+                <h1>Flashcards</h1>
+                <div class="flashcard-container">
+                    <div id="flashcard" class="flashcard">
+                        <div class="flashcard-front">
+                            <h2 id="flashcard-word">Loading...</h2>
+                            <p class="hint">Click to flip</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <h2 id="flashcard-translation">Loading...</h2>
+                            <p id="flashcard-info">Loading...</p>
+                            <div class="flashcard-controls">
+                                <button id="easy-btn" class="difficulty-btn easy"><i class="fas fa-smile"></i> Easy</button>
+                                <button id="medium-btn" class="difficulty-btn medium"><i class="fas fa-meh"></i> Medium</button>
+                                <button id="hard-btn" class="difficulty-btn hard"><i class="fas fa-frown"></i> Hard</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flashcard-progress">
+                        <span id="flashcard-count">0/0</span>
+                        <div class="progress-bar">
+                            <div id="flashcard-progress" class="progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div id="quiz-screen" class="screen">
+                <h1>Quiz</h1>
+                <div id="quiz-container">
+                    <div id="quiz-question" class="quiz-question">
+                        <h2 id="question-text">Loading question...</h2>
+                    </div>
+                    <div id="quiz-options" class="quiz-options">
+                        <!-- Options will be populated here -->
+                    </div>
+                    <div id="quiz-feedback" class="quiz-feedback">
+                        <!-- Feedback will be shown here -->
+                    </div>
+                    <button id="next-question" class="quiz-next-btn">Next Question</button>
+                    <div class="quiz-progress">
+                        <span id="quiz-count">0/0</span>
+                        <div class="progress-bar">
+                            <div id="quiz-progress" class="progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matching Game Screen -->
+            <div id="matching-screen" class="screen">
+                <h1>Word Matching Game</h1>
+                <div class="matching-instructions">
+                    <p>Match the Ngas words with their English translations. Click on a Ngas word to hear its pronunciation.</p>
+                </div>
+                <div class="matching-game">
+                    <div class="matching-column" id="ngas-words">
+                        <h3>Ngas Words</h3>
+                        <!-- Ngas words will be populated here -->
+                    </div>
+                    <div class="matching-column" id="english-words">
+                        <h3>English Words</h3>
+                        <!-- English words will be populated here -->
+                    </div>
+                </div>
+                <div id="matching-feedback"></div>
+                <button id="new-game-btn" class="matching-btn">New Set of Words</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio-player"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
