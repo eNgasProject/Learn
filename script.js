@@ -38487,44 +38487,38 @@ function setupVocabulary() {
 }
 
 function renderVocabularyList() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const category = categoryFilter.value;
-    const partOfSpeech = partOfSpeechFilter.value;
-    
-    vocabularyList.innerHTML = '';
-    
-    const filteredWords = ngasWords.filter(word => {
-        const matchesSearch = word.Ngas_Word.toLowerCase().includes(searchTerm) || 
-                             word.English.toLowerCase().includes(searchTerm);
-        const matchesCategory = category === '' || word.Category === category;
-        const matchesPartOfSpeech = partOfSpeech === '' || word.Part_of_Speech === partOfSpeech;
-        
-        return matchesSearch && matchesCategory && matchesPartOfSpeech;
+  const searchTerm = searchInput.value.toLowerCase();
+  const category = categoryFilter.value;
+  const partOfSpeech = partOfSpeechFilter.value;
+  vocabularyList.innerHTML = '';
+  const filteredWords = ngasWords.filter(word => {
+    const matchesSearch = searchTerm === '' || 
+                          word.Ngas_Word.toLowerCase().startsWith(searchTerm) || 
+                          word.English.toLowerCase().startsWith(searchTerm);
+    const matchesCategory = category === '' || word.Category === category;
+    const matchesPartOfSpeech = partOfSpeech === '' || word.Part_of_Speech === partOfSpeech;
+    return matchesSearch && matchesCategory && matchesPartOfSpeech;
+  });
+  if (filteredWords.length === 0) {
+    vocabularyList.innerHTML = '<p class="no-results">No words found matching your criteria.</p>';
+    return;
+  }
+  filteredWords.forEach(word => {
+    const wordItem = document.createElement('div');
+    wordItem.className = 'word-item';
+    wordItem.innerHTML = `
+      <h3>${word.Ngas_Word}</h3>
+      <p>${word.English}</p>
+      <div class="word-tags">
+        <span class="word-tag">${word.Part_of_Speech}</span>
+        <span class="word-tag">${word.Category}</span>
+      </div>
+    `;
+    wordItem.addEventListener('click', () => {
+      showWordDetail(word);
     });
-    
-    if (filteredWords.length === 0) {
-        vocabularyList.innerHTML = '<p class="no-results">No words found matching your criteria.</p>';
-        return;
-    }
-    
-    filteredWords.forEach(word => {
-        const wordItem = document.createElement('div');
-        wordItem.className = 'word-item';
-        wordItem.innerHTML = `
-            <h3>${word.Ngas_Word}</h3>
-            <p>${word.English}</p>
-            <div class="word-tags">
-                <span class="word-tag">${word.Part_of_Speech}</span>
-                <span class="word-tag">${word.Category}</span>
-            </div>
-        `;
-        
-        wordItem.addEventListener('click', () => {
-            showWordDetail(word);
-        });
-        
-        vocabularyList.appendChild(wordItem);
-    });
+    vocabularyList.appendChild(wordItem);
+  });
 }
 
 // Word Detail functions
