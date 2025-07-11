@@ -1,5 +1,5 @@
 // Ngas words data from the JSON
-const ngasWords = [];
+//const ngasWords = [];
 
 // DOM Elements
 const screens = {
@@ -70,6 +70,7 @@ const matchingFeedback = document.getElementById('matching-feedback');
 const newGameBtn = document.getElementById('new-game-btn');
 
 // App State
+let ngasWords = [];
 let currentScreen = 'home';
 let currentWord = null;
 let recentWords = [];
